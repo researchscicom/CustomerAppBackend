@@ -1,6 +1,7 @@
 package com.customer.spring.controller;
 import com.customer.spring.model.Customer;
 import com.customer.spring.service.CustomerService;
+import com.customer.spring.service.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,9 @@ import java.util.List;
 public class CustomerController {
     @Autowired
     public CustomerService customerService;
+
+    @Autowired
+    public ProducerService producerService;
 
     @GetMapping("/customer")
     public ResponseEntity<List<Customer>> getCustomers()
@@ -32,6 +36,7 @@ public class CustomerController {
     public void save(@RequestBody Customer customer)
     {
         customerService.saveCustomer(customer);
+        producerService.sendMsg(customer);
     }
 
     @PutMapping("/customer/{id}")
@@ -46,4 +51,12 @@ public class CustomerController {
     {
         customerService.deleteCustomer(id);
     }
+
+    @PostMapping("/produce")
+    public void sendMsg(@RequestBody Customer customer)
+    {
+        producerService.sendMsg(customer);
+    }
+
+
 }
