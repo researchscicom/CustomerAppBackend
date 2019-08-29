@@ -33,8 +33,7 @@ public class CustomerController {
     }
 
     @PostMapping("/customer")
-    public void save(@RequestBody Customer customer)
-    {
+    public void save(@RequestBody Customer customer) throws Exception {
         customerService.saveCustomer(customer);
         producerService.sendMsg(customer);
     }
@@ -53,8 +52,7 @@ public class CustomerController {
     }
 
     @PostMapping("/produce")
-    public void sendMsg(@RequestBody Customer customer)
-    {
+    public void sendMsg(@RequestBody Customer customer) throws Exception {
         producerService.sendMsg(customer);
     }
 

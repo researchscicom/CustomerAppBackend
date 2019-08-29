@@ -1,16 +1,11 @@
 package com.customer.spring.service;
 
 import com.customer.spring.model.Customer;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 @Service
 @Transactional(readOnly = true)
@@ -19,7 +14,12 @@ public class ProducerServiceImp implements ProducerService {
     private AmqpTemplate amqpTemplate;
 
     @Override
-    public void sendMsg(Customer customer) {
-        amqpTemplate.convertAndSend("customer.direct","customer.routingkey",customer);
+    public void sendMsg(Customer customer) throws Exception{
+//        amqpTemplate.convertAndSend("customer.direct","customer.routingkey",customer);
+        Object response = (Object) amqpTemplate.convertSendAndReceive("customer.direct","customer.routingkey",customer);
+        System.out.println("===============Response ==================");
+        System.out.println(response);
+        System.out.println("==========================================");
+
     }
 }
