@@ -1,6 +1,4 @@
 package com.customer.spring.service;
-
-import com.customer.spring.model.Customer;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +12,11 @@ public class ProducerServiceImp implements ProducerService {
     private AmqpTemplate amqpTemplate;
 
     @Override
-    public void sendMsg(Long proId) throws Exception{
-        Object response = (Object) amqpTemplate.convertSendAndReceive("customer.direct","customer.routingkey",proId);
+    public Object sendMsg(Long proId) throws Exception{
+        Object response = amqpTemplate.convertSendAndReceive("customer.direct","customer.routingkey",proId);
         System.out.println("============== Response ==================");
         System.out.println(response);
         System.out.println("==========================================");
+        return response;
     }
 }

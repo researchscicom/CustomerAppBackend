@@ -2,6 +2,7 @@ package com.customer.spring.controller;
 import com.customer.spring.model.Customer;
 import com.customer.spring.service.CustomerService;
 import com.customer.spring.service.ProducerService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,9 +53,7 @@ public class CustomerController {
     }
 
     @PostMapping("/produce")
-    public void sendMsg(@RequestBody Long proId) throws Exception {
-        producerService.sendMsg(proId);
+    public Object sendMsg(@RequestBody Customer customer) throws Exception {
+        return producerService.sendMsg(customer.getProId());
     }
-
-
 }

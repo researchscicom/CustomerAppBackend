@@ -25,6 +25,17 @@ public class Customer {
     @Column(name = "Gender")
     String gender;
 
+    @Column(name = "ProId")
+    Long proId;
+
+    public Long getProId() {
+        return proId;
+    }
+
+    public void setProId(Long proId) {
+        this.proId = proId;
+    }
+
     public Customer() {
     }
 
@@ -85,6 +96,7 @@ public class Customer {
                 ", email='" + email + '\'' +
                 ", city='" + city + '\'' +
                 ", gender='" + gender + '\'' +
+                ", proId=" + proId +
                 '}';
     }
 }

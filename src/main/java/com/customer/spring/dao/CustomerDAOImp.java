@@ -40,6 +40,7 @@ public class CustomerDAOImp implements CustomerDAO {
         customer2.setEmail(customer.getEmail());
         customer2.setGender(customer.getGender());
         customer2.setName(customer.getName());
+        customer2.setProId(customer.getProId());
         session.flush();
     }
 
