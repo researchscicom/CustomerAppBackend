@@ -35,7 +35,7 @@ public class CustomerController {
     @PostMapping("/customer")
     public void save(@RequestBody Customer customer) throws Exception {
         customerService.saveCustomer(customer);
-        producerService.sendMsg(customer);
+        //producerService.sendMsg(customer);
     }
 
     @PutMapping("/customer/{id}")
@@ -52,8 +52,8 @@ public class CustomerController {
     }
 
     @PostMapping("/produce")
-    public void sendMsg(@RequestBody Customer customer) throws Exception {
-        producerService.sendMsg(customer);
+    public void sendMsg(@RequestBody Long proId) throws Exception {
+        producerService.sendMsg(proId);
     }
 
 

@@ -14,12 +14,10 @@ public class ProducerServiceImp implements ProducerService {
     private AmqpTemplate amqpTemplate;
 
     @Override
-    public void sendMsg(Customer customer) throws Exception{
-//        amqpTemplate.convertAndSend("customer.direct","customer.routingkey",customer);
-        Object response = (Object) amqpTemplate.convertSendAndReceive("customer.direct","customer.routingkey",customer);
-        System.out.println("===============Response ==================");
+    public void sendMsg(Long proId) throws Exception{
+        Object response = (Object) amqpTemplate.convertSendAndReceive("customer.direct","customer.routingkey",proId);
+        System.out.println("============== Response ==================");
         System.out.println(response);
         System.out.println("==========================================");
-
     }
 }

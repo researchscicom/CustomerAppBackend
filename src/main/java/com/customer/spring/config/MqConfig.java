@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.converter.protobuf.ExtensionRegistryInitializer;
+import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 
 @Configuration
 @EnableRabbit
@@ -55,6 +57,8 @@ public class MqConfig {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory( connectionFactory() );
         factory.setMessageConverter( jsonMessageConverter() );
+
+
         factory.setConcurrentConsumers(3);
         factory.setMaxConcurrentConsumers(10);
         return factory;
